@@ -25,7 +25,7 @@ public class Produto {
 }
 
             public void setPreço(double preco) {
-              this.preço = preço;
+              this.preço =preço;
             }
 
            public void setDataValidade(Date DataValidade) {

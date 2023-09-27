@@ -2,9 +2,13 @@
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class Main {
+
+      static Produtosdb produtosdb = new Produtosdb();
+
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
 
@@ -14,6 +18,7 @@ public class Main {
 
       do {
              System.out.println("1 Cadastrar produto");
+             System.out.println("2 Listar produtos Cadastrados");
              System.out.println("0 Sair");
 
                Scanner  scanner1 = new Scanner(System.in);
@@ -41,26 +46,41 @@ public class Main {
                System.out.print("Qual preço voce deseja dar ao novo produto:");
                   double preço = scanner.nextDouble();
 
-                  System.out.print("Data de validade:");
+                  System.out.print("Data do pedido :");
                     String dataString = scanner.next();
 
                                   
-                  Date dataValidade = new SimpleDateFormat("dd/MM/yyyy ")                   .parse(dataString);
+                   Date dataValidade = new Date();
 
             Produto novoProduto = new Produto(id, descricao, preço, dataValidade);
+
+              produtosdb.addProduto(novoProduto);
 
               novoProduto.setId(id);
               novoProduto.setDescricao(descricao);
               novoProduto.setPreço(preço);
               novoProduto.setDataValidade(dataValidade);
-
-             System.out.println("Produto criado com sucesso");
-             System.out.println("---- ID:" + novoProduto.getId());
-             System.out.println("---- Descricao " + novoProduto.getDescricao());
-             System.out.println("---- Preço " + novoProduto.getPreço());
-             System.out.println("--- Data de validade " + novoProduto.getDataValidade());
-             System.out.println("------------------------------------"); 
+              
+            break;
        }
+
+          case 2:{
+               List<Produto> listaDeprodutos = produtosdb.getProdutosList();
+
+               for (Produto produto : listaDeprodutos){
+                
+                  System.out.println(" ID " + produto.getId());
+                  System.out.println(" Descriçao " + produto.getDescricao());
+                  System.out.println(" Preço " + produto.getPreço());
+                  System.out.println(" Data do pedido " + produto.getDataValidade());
+
+                  break;
+
+               }
+          }
+
+
+
       }
 }
 }
